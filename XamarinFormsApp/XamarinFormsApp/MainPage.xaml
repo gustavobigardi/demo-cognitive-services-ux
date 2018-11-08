@@ -17,6 +17,6 @@
         <Label Text="CPF" Margin="10,0,0,0" />
         <Entry Text="{Binding Cpf, Mode=TwoWay}" Placeholder="000.000.000-00" Margin="10,0,10,0" />
         <Label Text="Data Nascimento" Margin="10,0,0,0" />
-        <Entry Text="{Binding Nome, Mode=TwoWay}" Placeholder="dd/mm/aaaa" Margin="10,0,10,0" />
+        <Entry Text="{Binding DataNascimento, Mode=TwoWay}" Placeholder="dd/mm/aaaa" Margin="10,0,10,0" />
     </StackLayout>
 </ContentPage>
