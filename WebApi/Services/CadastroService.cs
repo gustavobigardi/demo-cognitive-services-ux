@@ -58,20 +58,31 @@ namespace WebApi.Services
             //CNH
             if (dados.Any(x => x.Contains("CARTEIRA") && x.Contains("NACIONAL") && x.Contains("HAB")))
             {
-                usuario.Nome = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("NOME")))+1);
-                usuario.RG = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC. IDENT")))+1).Split(" ").ElementAt(0);
-                usuario.OrgEmissor = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC. IDENT")))+1).Split(" ").ElementAt(1);
-                usuario.CPF = (dados.Where(x => Regex.IsMatch(x.Replace(" ", ""), @"^\d{3}\.\d{3}\.\d{3}-\d{2}$")).FirstOrDefault() ?? "").Replace(" ","");
-                usuario.DataNascimento = DateTime.ParseExact(dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DATA NASC")))+2), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            } 
+                usuario.Nome = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("NOME"))) + 1);
+                usuario.RG = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC. IDENT"))) + 1).Split(" ").ElementAt(0);
+                usuario.OrgEmissor = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC. IDENT"))) + 1).Split(" ").ElementAt(1);
+                usuario.CPF = (dados.Where(x => Regex.IsMatch(x.Replace(" ", ""), @"^\d{3}\.\d{3}\.\d{3}-\d{2}$")).FirstOrDefault() ?? "").Replace(" ", "");
+                try
+                {
+                    usuario.DataNascimento = DateTime.ParseExact(dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DATA NASC"))) + 2), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                { }
+            }
             else if (dados.Any(x => x.Contains("REGISTRO")) && dados.Any(x => x.Contains("GERAL")) && dados.Any(x => x.Contains("Delegado")))
             {
-                usuario.Nome = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("NOME")))+1);
-                usuario.RG = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("GERAL")))+1).Split(" ").ElementAt(0);
-                var emissor = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC ORIGEM")))+1).Split(" ");
+                usuario.Nome = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("NOME"))) + 1);
+                usuario.RG = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("GERAL"))) + 1).Split(" ").ElementAt(0);
+                var emissor = dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DOC ORIGEM"))) + 1).Split(" ");
                 usuario.OrgEmissor = emissor.ElementAt(0) + "-" + emissor.ElementAt(1);
-                usuario.CPF = (dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("CPF")))+1) ?? "").Replace("/", "-");
-                usuario.DataNascimento = DateTime.ParseExact(dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DATA DE NASCIMENTO")))+2), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                usuario.CPF = (dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("CPF"))) + 1) ?? "").Replace("/", "-");
+                try
+                {
+                    usuario.DataNascimento = DateTime.ParseExact(dados.ElementAt(dados.IndexOf(dados.FirstOrDefault(x => x.Contains("DATA DE NASCIMENTO"))) + 2), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                {
+                }
             }
 
             return usuario;

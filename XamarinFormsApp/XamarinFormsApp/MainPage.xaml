@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinFormsApp"
+             x:Class="XamarinFormsApp.MainPage"
+             x:Name="page">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Button Text="Tirar foto" Clicked="Button_Clicked" FontSize="20" />
+        <Label Text="Nome" Margin="10,0,0,0" />
+        <Entry Text="{Binding Nome, Mode=TwoWay}" Placeholder="Nome do usuario" Margin="10,0,10,0" />
+        <Label Text="RG" Margin="10,0,0,0" />
+        <Entry Text="{Binding Rg, Mode=TwoWay}" Placeholder="RG" Margin="10,0,10,0" />
+        <Label Text="Órgão Emissor" Margin="10,0,0,0" />
+        <Entry Text="{Binding OrgEmissor, Mode=TwoWay}" Placeholder="Org. Emissor" Margin="10,0,10,0" />
+        <Label Text="CPF" Margin="10,0,0,0" />
+        <Entry Text="{Binding Cpf, Mode=TwoWay}" Placeholder="000.000.000-00" Margin="10,0,10,0" />
+        <Label Text="Data Nascimento" Margin="10,0,0,0" />
+        <Entry Text="{Binding Nome, Mode=TwoWay}" Placeholder="dd/mm/aaaa" Margin="10,0,10,0" />
+    </StackLayout>
+</ContentPage>
